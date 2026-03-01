@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 1: Таблица 5х6</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+            width: 50px;
+            height: 40px;
+        }
+        .orange {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Задание 1: Таблица 5×6</h1>
+ 
+    <div id="table-container"></div>
+
+    <script>
+        const numbers = [];
+        for (let i = 0; i < 30; i++) {
+            numbers.push(Math.floor(Math.random() * 100));
+        }
+        
+        console.log('Массив чисел:', numbers);
+
+        const container = document.getElementById('table-container');
+        
+        const table = document.createElement('table');
+        
+        let numberIndex = 0; 
+        
+        for (let row = 0; row < 5; row++) {
+            
+            const tr = document.createElement('tr');
+            
+            for (let col = 0; col < 6; col++) {
+                
+                const td = document.createElement('td');
+
+                const currentNumber = numbers[numberIndex];
+                
+                td.textContent = currentNumber;
+                
+                if (currentNumber >= 50) {
+                    td.classList.add('orange');
+                }
+
+                tr.appendChild(td);
+
+                numberIndex++;
+            }
+
+            table.appendChild(tr);
+        }
+        
+       
+        container.appendChild(table);
+        
+        console.log('Таблица создана!');
+    </script>
+</body>
+</html>
