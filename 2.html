@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2: Кнопка добавления</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+            width: 50px;
+            height: 40px;
+        }
+        .orange {
+            background-color: orange;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Задание 2: Кнопка для добавления чисел</h1>
+    
+    <button onclick="addNumber()">Добавить число</button>
+
+    <div id="table-container"></div>
+
+    <script>
+        let numbers = [];
+
+        function createInitialTable() {
+            numbers = [];
+            
+            for (let i = 0; i < 30; i++) {
+                numbers.push(Math.floor(Math.random() * 100));
+            }
+            
+            renderTable();
+            
+            console.log('Начальная таблица создана, чисел:', numbers.length);
+        }
+        
+        function renderTable() {
+            const container = document.getElementById('table-container');
+        
+            container.innerHTML = '';
+           
+            const table = document.createElement('table');
+           
+            const rows = Math.ceil(numbers.length / 6);
+        
+            for (let row = 0; row < rows; row++) {
+                const tr = document.createElement('tr');
+                
+                for (let col = 0; col < 6; col++) {
+                    const index = row * 6 + col;
+                    const td = document.createElement('td');
+                    
+                    if (index < numbers.length) {
+                        const currentNumber = numbers[index];
+                        td.textContent = currentNumber;
+                        
+                        if (currentNumber >= 50) {
+                            td.classList.add('orange');
+                        }
+                    } else {
+                        td.textContent = '';
+                    }
+                    
+                    tr.appendChild(td);
+                }
+                
+                table.appendChild(tr);
+            }
+            
+            container.appendChild(table);
+        }
+        
+        function addNumber() {
+            const newNumber = Math.floor(Math.random() * 100);
+            
+            numbers.push(newNumber);
+            
+            renderTable();
+            
+            console.log(`Добавлено число ${newNumber}, всего чисел: ${numbers.length}`);
+        }
+      
+        createInitialTable();
+    </script>
+</body>
+</html>
